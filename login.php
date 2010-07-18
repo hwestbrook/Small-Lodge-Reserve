@@ -54,7 +54,7 @@
 			  </tr>
 			  <tr>
 				<td></td>
-				<td>or <a href="register.php">Register</a> for an account</td>
+				<td>or <span class="bigletters"><a href="register.php">Register</a></span> for an account</td>
 			  </tr>
 			  <tr>
 				<td></td>
