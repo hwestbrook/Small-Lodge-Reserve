@@ -1,0 +1,4 @@
+If you are going to use this, there a couple things you will need to know.
+
+-includes/constants.sample.php needs to be edited before anything will work
+-it is designed for 7 rooms. I want to make it work with more, but I don't have enough time, so if you would like to add that feature, go ahead.
