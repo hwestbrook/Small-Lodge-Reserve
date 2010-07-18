@@ -1,8 +1,8 @@
 <?php
-	//page width a is narrow, b is wide
-	$d = "b";
+    //page width a is narrow, b is wide
+    $d = "b";
 	
-	// require common code
+    // require common code
     require_once("includes/common.php"); 
     
     // get user id for looking up Portfolio
