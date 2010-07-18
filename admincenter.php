@@ -1,8 +1,4 @@
 <?php
-
-	// I am testing this!
-	// Some MORE
-        // AND SOME MORE
 	
 	//page width a is narrow, b is wide
 	$d = "b";
