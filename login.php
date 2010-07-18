@@ -33,7 +33,7 @@
 	<? progresswrite() ?>
 	
 	<div id="content">
-		  <h3>To book your vacation, please <span class="bigletters"><a href="register.php">Register</a></span> for an account</h3>
+		  <h3>If you have not previously done so, please <span class="bigletters"><a href="register.php">Register</a></span> for an account, otherwise login below.</h3>
 		  <form action="login2.php" method="post">
 			<table border="0" align="left">
 			  <tr>

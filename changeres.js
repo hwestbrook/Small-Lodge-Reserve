@@ -19,6 +19,15 @@ var roomchange = [ {"room":"Annex 1", "num":1, "datesavail":[]},
 				   {"room":"Main 2", "num":6, "datesavail":[]},
 				   {"room":"Main 3", "num":7, "datesavail":[]}];
 
+function alertDel(transid)
+{
+	var answer = confirm("Are you sure you want to delete transactions #" + transid + "?");
+	if (answer) {
+		$.post("deletetrans.php", { deltrans: transid } );
+		window.location.reload();
+	}
+}
+
 
 /*
  * function changeres(datein, dateout, transactionid)
