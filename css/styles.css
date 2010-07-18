@@ -1,0 +1,244 @@
+/****************************************************************************
+ * styles.css
+ *
+ * Computer Science 50
+ * Problem Set 7
+ *
+ * Global stylesheet.
+ ****************************************************************************
+/* unique elements */
+
+#header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 5.5em;
+	padding-top: .5em;
+	width: 100%;	
+	min-width: inherit;
+}
+
+#content {
+	background: #FF00FF;
+	margin-left: 12em;
+	margin-top: 6em;
+	padding: 10px;
+}
+
+#changereserve
+{
+	margin-left: 12em;
+	margin-top: .5em;
+	padding: 10px;
+	background-color: green;
+}
+
+#changereservep
+{
+	background-color: black;
+	border: 1px solid white;
+}
+
+#lookup
+{
+	margin-left: 12em;
+	margin-top: .5em;
+	padding: 10px;
+	background-color: aqua;
+}
+
+#results
+{
+	margin-left: 12em;
+	margin-top: .5em;
+	padding: 10px;
+	background-color: aqua;
+}
+
+#resultsp
+{
+	background-color: black;
+	border: 1px solid white;
+}
+
+#curres
+{
+	background-color: black;
+	border: 1px solid white;
+}
+
+#footer {
+	clear: both;
+	height: 1.8em;
+	width: 100%;
+	text-align: center;
+	background: #11FF11;
+	position: relative;
+	top: 5px;
+}
+
+#indextable {
+	border: 5px;
+	background-color: #000;
+}
+
+ul#list-nav {
+	list-style: none;
+	margin: 0px;
+	padding: 0;
+	display: block;
+	width: 11em;
+}
+
+ul#list-nav li a {
+	padding:5px 5px;
+	width:11em;
+	background:#1100FF;
+	color:#eee;
+	float:left;
+	text-align:left;
+}
+
+ul#list-nav li a:hover {
+	background:#F1F1F1;
+	color:#000
+}
+
+ul#foot-nav {
+	list-style: none;
+	margin: 0px;
+	padding: 0;
+	display: in-line;
+	width: 100%;
+}
+
+ul#foot-nav li a {
+	padding:5px 5px;
+	width:11em;
+	background:#11FF11;
+	color:#000;
+	float:right;
+	text-align:right;
+}
+
+ul#foot-nav li a:hover {
+	background:#F1F1F1;
+	color:#000;
+}
+
+
+
+
+/* elements */
+
+h1
+{
+	font-size: 50pt;
+	font-weight: bold;
+	margin: 0 0;
+	padding-right: .5em;
+	text-shadow: #FF6600 3px 3px 2px;
+	text-align: right;
+}
+
+body
+{
+  background: #FFFFFF;
+  color: #000000;
+  font-family: sans-serif;
+  min-width: 50em;
+
+}
+
+A:link {text-decoration: none}
+A:visited {text-decoration: none}
+A:active {text-decoration: none}
+A:hover {text-decoration: underline; color: red;}
+
+c {text-align: left; font-weight: normal; max-width: 12em;}
+
+form
+{
+  margin: 0px;
+}
+
+
+
+/* classes */
+
+.field
+{
+  padding: 5px;
+  text-align: right;
+}
+
+.thead {
+	font-size: 13pt;
+	background: orange;
+	border-bottom: 5px;
+	border-bottom-color: black;
+	text-align: center;
+}
+
+.thead td {
+	width: 75px;
+}
+
+.curreshead {
+	font-size: 13pt;
+	background: orange;
+	border-bottom: 5px;
+	border-bottom-color: black;
+	text-align: center;
+}
+
+.curreshead td {
+	width: 125px;
+}
+
+.availtblleft {
+	font-size: 9pt;
+	background: #CCC;
+	width: 125px;
+}
+
+.currestbl {
+	font-size: 9pt;
+	background: white;
+	width: 75px;
+	text-align: center;
+}
+
+tr.currestbl:hover {
+	background: green;
+	color: white;
+	
+}
+
+.availtblcontvac {
+	font-size: 9pt;
+	background: white;
+	width: 75px;
+}
+
+td.availtblcontvac:hover {
+	background: green;
+	color: white;
+}
+
+.availtblcontres {
+	font-size: 9pt;
+	background: orange;
+	width: 75px;
+}
+
+td.availtblcontres:hover {
+	background: aqua;
+}
+
+.availtblcontocc {
+	font-size: 9pt;
+	background: red;
+	width: 75px;
+}
+
