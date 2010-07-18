@@ -1,10 +1,11 @@
 <?php
+
 	// I am testing this!
 	
 	//page width a is narrow, b is wide
 	$d = "b";
 	
-	// require common code
+    // require common code
     require_once("includes/common.php"); 
     
     // get user id for looking up Portfolio
