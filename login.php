@@ -33,7 +33,7 @@
 	<? progresswrite() ?>
 	
 	<div id="content">
-		  <h2>Login Page</h2>
+		  <h3>To book your vacation, please <span class="bigletters"><a href="register.php">Register</a></span> for an account</h3>
 		  <form action="login2.php" method="post">
 			<table border="0" align="left">
 			  <tr>
@@ -54,7 +54,7 @@
 			  </tr>
 			  <tr>
 				<td></td>
-				<td>or <span class="bigletters"><a href="register.php">Register</a></span> for an account</td>
+				<td>or </td>
 			  </tr>
 			  <tr>
 				<td></td>

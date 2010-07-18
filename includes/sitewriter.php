@@ -10,7 +10,7 @@ function realheadwrite() {
 	echo <<<EOT
 
 	<title>Reservations</title>
-	<link href="/mainstyle.css" rel="stylesheet" type="text/css" />
+	<link href="../mainstyle.css" rel="stylesheet" type="text/css" />
     
     <!-- jQuery & jQuery UI & CSS to go with the UI-->
     <link type="text/css" href="css/flick/jquery-ui-1.8.2.custom.css" rel="Stylesheet" />	
