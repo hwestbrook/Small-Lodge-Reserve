@@ -26,12 +26,14 @@ EOT;
 	
 	$curres = mysql_query($sqlcheck);
 
+
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+	"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 
 <? realheadwrite() ?>
@@ -66,7 +68,17 @@ EOT;
 				/* Init DataTables */
 				oTable = $('#curres').dataTable();
 			} );
-		</script>
+	</script>
+
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$('#resultsp').dataTable( {
+				"bProcessing": true,
+				"sAjaxSource": ('availabilityAJAX.php?datein=' + '2010-07-15' + '&dateout=' + '2010-08-30')
+			} );
+		} );
+		
+	</script>
 
 </head>
 
@@ -183,19 +195,23 @@ EOT;
 		</form>
 	</div>
 	
-	<div id="results" style="display: none;">
+	<div id="results">
 		<h3><em>Currently Available:</em></h3>
-		<table id="resultsp">
+		<table cellpadding="0" cellspacing="0" border="0" class="display" id="resultsp">
+			<thead>	
 				<tr class="thead">
-					<td>Date</td>
-					<td>Annex 1</td>
-					<td>Annex 2</td>
-					<td>Annex 3</td>
-					<td>Annex 4</td>
-					<td>Main 1</td>
-					<td>Main 2</td>
-					<td>Main 3</td>
+					<th width="150px">Date</th>
+					<th>Annex 1</th>
+					<th>Annex 2</th>
+					<th>Annex 3</th>
+					<th>Annex 4</th>
+					<th>Main 1</th>
+					<th>Main 2</th>
+					<th>Main 3</th>
 				</tr>
+			</thead>
+			<tbody>
+			</tbody>
 		</table>
 		
 		<div id="booking" style="display: none;">

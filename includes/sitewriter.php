@@ -74,6 +74,31 @@ echo <<<EOT
 EOT;
 }
 
+/* Function to write the navigation! */
+function adminnavwrite($d) {
+
+echo <<<EOT
+ 				  	</div>
+		
+			</div>
+			<div class="c3$d" style="background:none;">
+				<div id="sidebar1">
+	            	<br/><br/>
+	                <ul id="widgets3">
+	                		<li class="widget widget_recent_entries">
+	                		<h2>Admin</h2>
+							<ul>
+								<h3><li><a href='adminclients' title='Clients'>Clients</a></li></h3>
+							</ul>
+						</li>
+	                    </ul>       
+	        	</div>
+			</div>
+    	</div>
+EOT;
+}
+
+
 /* Function to write the header! */
 function headwrite($d) {
 

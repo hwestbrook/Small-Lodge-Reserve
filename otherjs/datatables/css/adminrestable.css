@@ -56,7 +56,7 @@
 }
 
 table.display thead th {
-	padding: 3px 0px 3px 10px;
+	padding: 3px 3px 3px 3px;
 	cursor: pointer;
 	* cursor: hand;
 }
@@ -146,12 +146,12 @@ table.display thead th {
  */
 table.display {
 	margin: 0 auto;
-	width: 100%;
+	width: 750px;
 	clear: both;
 }
 
 table.display tfoot th {
-	padding: 3px 10px;
+	padding: 3px 3px;
 	border-top: 1px solid black;
 	font-weight: bold;
 }
@@ -161,7 +161,7 @@ table.display tr.heading2 td {
 }
 
 table.display td {
-	padding: 3px 10px;
+	padding: 3px 3px;
 }
 
 table.display td.center {

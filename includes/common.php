@@ -41,7 +41,7 @@
     }
     
     // require authentication for most pages
-    if (preg_match("/(:?admin(:?center|bookit|bookit2)deletetrans)\d*\.php$/", $_SERVER["PHP_SELF"]))
+    if (preg_match("/(:?admin(:?center|bookit|bookit2|clients)deletetrans)\d*\.php$/", $_SERVER["PHP_SELF"]))
     {
         if ($_SESSION["admin"] == 0) {
             redirect("usercenter.php");
