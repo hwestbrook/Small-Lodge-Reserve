@@ -14,13 +14,7 @@
     
     // get the number of people staying in the lodge
     $numpeople = mysql_real_escape_string($_POST["numpeople"]);
-    $changetransid = mysql_real_escape_string($_POST["changetransid"]);
-    
-    // if this is a change in reservations, need to delete all old first
-    if ($changetransid != "") {
-    	$sqlchange = "DELETE FROM rsrvtrans WHERE uid=$user AND transactionid='$changetransid'";
-    	mysql_query($sqlchange);
-    }    	
+    $changetransid = mysql_real_escape_string($_POST["changetransid"]);	
     
     // put the data in the database!
     for ($i = 0; $i < count($bigtime); $i++) {
@@ -78,7 +72,7 @@ EOD;
 		Your transaction id # is: <?=$converted?> 	<br />
 		Please refer to it if you have any questions or concerns.
 		<br />	<br />
-		<h2><em>Thanks! Click <a href="usercenter">Here</a> to return to the user center.</em></h2>
+		<h2><em>Thanks! Click <a href="usercenter.php">Here</a> to return to the user center.</em></h2>
 		
 	</div>
 

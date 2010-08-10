@@ -66,7 +66,53 @@ EOT;
 				/* Init DataTables */
 				oTable = $('#curres').dataTable();
 			} );
-		</script>
+	</script>
+
+	<style type="text/css" media="screen">
+		#changeresclose {
+			position: relative;
+			top: -40px;
+			left: 700px;
+			background-color: #A5B4C5;
+			padding: 5px;
+			border: 1px solid black;
+		}
+		#lookupclose {
+			position: relative;
+			top: -40px;
+			left: 700px;
+			background-color: #A5B4C5;
+			padding: 5px;
+			border: 1px solid black;
+		}
+	</style>
+
+	<!-- sliding tables! -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+		    $(".transid").click(function () {
+		      $("#changereserve").show("blind", {}, 1000);
+		    });
+		  });
+		$(document).ready(function() {
+		    $("#changeresclose").click(function () {
+		      $("#changereserve").hide("blind", {}, 1000);
+		    });
+		  });
+
+		$(document).ready(function() {
+		    $("#lookupsubmit").click(function () {
+		      $("#results").show("blind", {}, 1000);
+		    });
+		  });
+		$(document).ready(function() {
+		    $("#lookupclose").click(function () {
+		      $("#results").hide("blind", {}, 1000);
+		    });
+		  });
+		
+
+	</script>
 
 </head>
 
@@ -105,7 +151,7 @@ EOT;
 				<tbody class="currestbl">
 				<? while ($row = mysql_fetch_assoc($curres)) { ?>
 					<tr class="curresrow">
-						<td class="transid"><a href="#changeresanchor" onclick="changeres( '<? 
+						<td class="transid"><a onclick="changeres( '<? 
 							echo date('Y-m-d', strtotime('-3 day', strtotime($row["mindate"]))) ?>', '<? 
 							echo date('Y-m-d', strtotime('+4 days', strtotime($row["maxdate"]))) ?>', '<? 
 							echo $row["transactionid"] ?>');"><? 
@@ -137,6 +183,7 @@ EOT;
 	<div id="changereserve" style="display: none;">
 		<a name="changeresanchor"></a>
 		<h3><em>Current Reservation and Available Dates:</em></h3>
+		<big id="changeresclose">Close</big>
 		<b>Select or Deselect dates to change your reservation</b>
 		<p>If you submit this form with no new dates selected in green, your reservation will be canceled.</p>
 		<p>No changes will occur until the "Submit Change" button below is clicked and you follow the steps on the confirmation page.</p>
@@ -168,7 +215,7 @@ EOT;
 	
 	<div id="lookup">
 		<h2><em>Check Availabilty and Book New Dates</em></h2>
-		<form action="#" onsubmit="proxycontact(this.datein.value,this.dateout.value); return false">
+		<form action="" onsubmit="proxycontact(this.datein.value,this.dateout.value); return false">
 			<table>
 				<tr>
 					<td>Arrival Date <br /><small>(e.g. 2010-07-15)</td>
@@ -177,7 +224,7 @@ EOT;
 				<tr>
 					<td><input type="text" name="datein" id="datepickerin" /></td>
 					<td><input type="text" name="dateout" id="datepickerout" /></td>
-					<td><input type="submit" class="submitbutton" value="Go!" /></td>
+					<td><input id="lookupsubmit" type="submit" class="submitbutton" value="Go!" /></td>
 				</tr>
 			</table>
 		</form>
@@ -185,6 +232,7 @@ EOT;
 	
 	<div id="results" style="display: none;">
 		<h3><em>Currently Available:</em></h3>
+		<big id="lookupclose">Close</big>
 		<table id="resultsp">
 				<tr class="thead">
 					<td>Date</td>

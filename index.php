@@ -50,7 +50,7 @@
 				</tr>
 			</table>
 		</form>
-		<p>or just <a href="login">Login</a></p>
+		<p>or just <a href="login.php">Login</a></p>
 	</div>
 	
 	<div id="results" style="display: none;">

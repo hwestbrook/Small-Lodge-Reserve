@@ -69,8 +69,8 @@ function changeres(datein, dateout, transactionid)
 			// check if this page is ready for new data
 			if (abc.status == 200) {
 			
-				// show the div where data is going
-    			document.getElementById('changereserve').style.display = "";
+				// show the div where data is going *** Functionality replaced with jQuery UI
+    			// document.getElementById('changereserve').style.display = "";
     			
     			// evaluate the data
     			var reschange = eval( abc.responseText );

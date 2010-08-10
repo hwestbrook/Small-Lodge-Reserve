@@ -30,8 +30,8 @@
 		//prepare an array for the room
 		$room = array();
 		
-		$numdays = count($jsondates[$i]->datesavail);
-		
+		$numdays = xcount($jsondates[$i]->datesavail);
+		$numvalues = count($jsondates[$i]->datesavail);
 		
 		if ( $numdays > 0) {
 			// put the room in the array
@@ -42,7 +42,7 @@
 			$room["dates"] = array();
 			
 			// put dates into room["dates"]
-			for ($j = 0, $k = 0; $j < $numdays; $j++) {
+			for ($j = 0, $k = 0; $j < $numvalues; $j++) {
 				// check if there is a date here
 				if ($jsondates[$i]->datesavail[$j] != null) {
 					// put that date into the field
@@ -57,6 +57,7 @@
 	}
 	
 	// put the array into the session
+	// print_r($bigtime);
 	$_SESSION["bigtime"] = $bigtime;
 	
 
@@ -92,9 +93,13 @@
 					</td>
 				</tr>
 			<?  if ($bigtime[0]["dates"][0] == 0) {
-					echo "You did not select any dates<br /><br />";
-					echo "Since you did not select alternate dates,<br />";
-					echo "Pressing submit will delete your current reservation.<br /><br />";
+					echo <<<EOT
+				<span id=nobookinfo>You did not select any dates<br /><br />
+					Please go <a href="javascript:history.go(-1)">Back</a>  to the previous screen and select new dates. <br /><br />
+					Thanks!
+					
+				</span>
+EOT;
 				}
 				else { ?>	
 				<tr>

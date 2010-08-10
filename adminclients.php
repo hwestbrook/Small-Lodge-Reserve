@@ -35,7 +35,7 @@
 			
 			$(document).ready(function() {
 				/* Apply the jEditable handlers to the table */
-				$('.invoice').editable( 'clientchanger.php', {
+				$('.odd').editable( 'clientchanger.php', {
 					"callback": function( sValue, y ) {
 						var aPos = oTable.fnGetPosition( this );
 						oTable.fnUpdate( sValue, aPos[0], aPos[1] );
@@ -80,16 +80,15 @@
 	
 	<? progresswrite() ?>
 
-	<div id="results">
-		<h3><em>Currently Available:</em></h3>
+	<div id="clients">
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="clients">
 			<!-- uid,admin,firstname,lastname,phonenumber,email,addressline1,addressline2,city,state,login.zipcode -->
 			<thead>	
 				<tr class="thead">
-					<th class="clienthead"></th>
-					<th class="clienthead"></th>
-					<th class="clienthead">F.Name</th>
+					<th class="clienthead">#</th>
+					<th class="clienthead">SU</th>
 					<th class="clienthead">L.Name</th>
+					<th class="clienthead">F.Name</th>
 					<th class="clienthead"></th>
 					<th class="clienthead"></th>
 					<th class="clienthead">Ad 1</th>
@@ -100,6 +99,19 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+					<td class="editable"></td>
+				</tr>
 			</tbody>
 		</table>
 	</div>

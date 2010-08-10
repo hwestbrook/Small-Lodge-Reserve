@@ -173,4 +173,21 @@
 		 return FALSE;
 	   }
 	} 
+	
+	 /*
+    * void
+    * xcount($array)
+    * 
+    * returns the count of non-null values in an array
+    * 
+    */	
+	
+	function xcount($array) {
+	        while (list($key, $value) = each($array)) {
+	                if ($value) {
+	                        $count++;
+	                }
+	        }
+	return $count;
+	}
 ?>

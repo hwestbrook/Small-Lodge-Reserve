@@ -17,7 +17,7 @@ function realheadwrite() {
 	<script type="text/javascript" src="otherjs/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="otherjs/jquery-ui-1.8.2.custom.min.js"></script>	
 	
-	<!-- data tables javascript-->
+	<!-- JSON javascript-->
 	<script type="text/javascript" src="otherjs/json2.min.js"></script>
 	
 	<!-- reserve's JavaScript -->
@@ -41,13 +41,13 @@ echo <<<EOT
                 		<li class="widget widget_recent_entries">
                 		<h2>Pages</h2>
 						<ul>
-							<h3><li><a href='/index' title='Home'>Home</a></li></h3>
-							<h3><li><a href='/photos' title='Photos'>Photos</a></li></h3>
-							<h3><li><a href='/rooms' title='Rooms'>Rooms</a></li></h3>
-							<h3><li><a href='/todo' title='To Do'>To Do</a></li></h3>
-							<h3><li><a href='/about' title='About'>About</a></li></h3>
-							<h3><li><a href='/contact' title='Contact'>Contact</a></li></h3>
-							<h3><li><a href='usercenter' title='Contact'>Book It!</a></li></h3>
+							<h3><li><a href='../index.php' title='Home'>Home</a></li></h3>
+							<h3><li><a href='../photos' title='Photos'>Photos</a></li></h3>
+							<h3><li><a href='../rooms.php' title='Rooms'>Rooms</a></li></h3>
+							<h3><li><a href='../todo.php' title='To Do'>To Do</a></li></h3>
+							<h3><li><a href='../about.php' title='About'>About</a></li></h3>
+							<h3><li><a href='../contact.php' title='Contact'>Contact</a></li></h3>
+							<h3><li><a href='usercenter.php' title='Contact'>Book It!</a></li></h3>
 						</ul>
 					</li>
                     </ul>       
@@ -88,7 +88,8 @@ echo <<<EOT
 	                		<li class="widget widget_recent_entries">
 	                		<h2>Admin</h2>
 							<ul>
-								<h3><li><a href='adminclients' title='Clients'>Clients</a></li></h3>
+								<h3><li><a href='adminclients.php' title='Clients'>Clients</a></li></h3>
+								<h3><li><a href='admincenter.php' title='Admin Center'>Admin Center</a></li></h3>
 							</ul>
 						</li>
 	                    </ul>       
@@ -154,7 +155,7 @@ function footwrite($d) {
 $adminlink = "";
 
 if ($_SESSION["admin"] == 1) {
-	$adminlink = "<a href='admincenter'>Admin Center</a><strong> * </strong>";
+	$adminlink = "<a href='admincenter.php'>Admin Center</a><strong> * </strong>";
 }
 
 

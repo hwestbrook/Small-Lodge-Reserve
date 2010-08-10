@@ -64,7 +64,7 @@ function proxycontact(datein, dateout)
     			document.getElementById("progress").style.display = "none";
     			
     			// show the beginning of the table
-    			document.getElementById('results').style.display = "";
+    			// document.getElementById('results').style.display = "";
     
 				// to evaluate proxy's JSON response
 				// example of how to parse ...
