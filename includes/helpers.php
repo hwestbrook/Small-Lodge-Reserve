@@ -190,4 +190,29 @@
 	        }
 	return $count;
 	}
+	
+	/*
+     * stock
+     * lookup($symbol)
+     *
+     * Returns a stock by symbol (case-insensitively) else NULL if not found.
+     *
+     * Relies on Microsoft for articles and Yahoo for everything else.
+     */
+	function transactionid($uid, $roomseed) {
+	
+		$transactionid = date('syd') . sprintf("%d", $uid) . sprintf("%d", $roomseed);
+	
+		$codeset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		$base = strlen($codeset);
+		$n = $transactionid;
+		$converted = "";
+	
+		while ($n > 0) {
+		  $converted = substr($codeset, ($n % $base), 1) . $converted;
+		  $n = floor($n/$base);
+		}
+	
+		return $converted;
+	}
 ?>

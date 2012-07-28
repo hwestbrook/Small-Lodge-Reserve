@@ -80,7 +80,7 @@
 	
 	<? progresswrite() ?>
 
-	<div id="clients">
+	<div id="clients" style="background-color: yellow;">
 		<table cellpadding="0" cellspacing="0" border="0" class="display" id="clients">
 			<!-- uid,admin,firstname,lastname,phonenumber,email,addressline1,addressline2,city,state,login.zipcode -->
 			<thead>	

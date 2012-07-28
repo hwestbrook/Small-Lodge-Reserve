@@ -107,6 +107,19 @@ EOT;
 					<input type="number" name="numpeople" min="1" max="4" style="width: 40px;" />
 					</td>
 				</tr>
+				<tr>
+					<td colspan="2">Preferred contact method:
+						<select id="prefcontact" name="prefcontact">
+						  <option value="phone">Phone</option>
+						  <option value="email">Email</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">Handicap Accessible:
+					<input type="checkbox" name="handicap" value=1 style="width: 40px;" />
+					</td>
+				</tr>
 				<tr><td><br /></td></tr>
 			
 				<? for ($b = 0; $b < count($bigtime); $b++) { ?>
@@ -124,6 +137,18 @@ EOT;
 				</tr>
 				<tr><td><br /></td></tr>
 			<?	} ?> <? } ?>
+				<tr>
+					<td colspan="4">
+						<textarea rows="5" cols="60" wrap="physical" name="activities">Let us know about activities you are interested in here (e.g. Salmon, Halibut or Trout Fishing, Hiking, Flyouts, Bear Viewing, and more!).</textarea>
+					</td>
+				</tr>
+				<tr><td><br /></td></tr>
+				<tr>
+					<td colspan="4">
+						<textarea rows="5" cols="60" wrap="physical" name="comments">Enter any comments or special requests here (e.g. Breakfast in the morning or Wheelchair access to our dock).</textarea>
+					</td>
+				</tr>
+				<tr><td><br /></td></tr>
 				<tr>
 					<td></td>
 					<td><input type="submit" value="Submit" /></td>

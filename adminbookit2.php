@@ -11,10 +11,17 @@
     
     // get the number of people staying in the lodge
     $numpeople = mysql_real_escape_string($_POST["numpeople"]);
+	$handicap = mysql_real_escape_string($_POST["handicap"]);
+	$activities = mysql_real_escape_string($_POST["activities"]);
+	$comments = mysql_real_escape_string($_POST["comments"]);
+	$prefcontact = mysql_real_escape_string($_POST["prefcontact"]);
     $changetransid = mysql_real_escape_string($_POST["changetransid"]);
     $clientid = mysql_real_escape_string($_POST["client"]);
 		//store original val of client id for later use
 		$origclientid = $clientid;
+	
+	// make sure handicap is not equal to NULL
+	if ($handicap != 1) {$handicap = 0;}
 	
 	// clean the input of the a new guest
 	$email = mysql_real_escape_string($_POST["email"]);
@@ -58,18 +65,8 @@
 	$bigdatelength = count($bigtime[0]["dates"]);
 
 	// make the unique trans id
-	$transactionid = $clientid . date('dny', strtotime($bigtime[0]["dates"][0])) . date('d', strtotime($bigtime[0]["dates"][$bigdatelength - 1])) . $bigtime[0]["in"];
-    		
-    $codeset = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	$base = strlen($codeset);
-	$n = $transactionid;
-	$converted = "";
-	
-	while ($n > 0) {
-	  $converted = substr($codeset, ($n % $base), 1) . $converted;
-	  $n = floor($n/$base);
-	}
-	
+	$roomseed = $bigtime[0]["in"];
+	$converted = transactionid($user, $roomseed);
 
 	// put the data in the database!
     for ($i = 0; $i < count($bigtime); $i++) {
@@ -79,11 +76,11 @@
     		
     		
     		$sql =<<<EOD
-				INSERT INTO rsrvtrans (room, date, numguests, uid, transactionid) 
-    			VALUES ( $room, "$date", $numpeople, $clientid, "$converted")
+				INSERT INTO rsrvtrans (room, date, numguests, handicap, activities, comments, uid, transactionid, prefcontact) 
+    			VALUES ( $room, "$date", $numpeople, $handicap, "$activities", "$comments", $clientid, "$converted", "$prefcontact")
 EOD;
     		
-    		mysql_query($sql);
+    		$err_chk = mysql_query($sql);
     	}
     }
 	
@@ -111,14 +108,19 @@ EOD;
 	<? progresswrite() ?>
 
 	<div id="content">
-		<h2>The Reservation Has Been Entered Into the System</h2>
-		Be sure to double check this reservation, and ask if the client would like something mailed
-		<br />	<br />
-		The transaction id # is: <?=$converted?> 	<br />
-		An email was sent to the client
-		<br />	<br />
-		<h2><em>Nice! Click <a href="admincenter.php">Here</a> to return to the Admin center.</em></h2>
 		
+		<?  if(!$err_chk) { 
+			echo "Error, please try again";
+		} 	
+			else { ?>
+			<h2>The Reservation Has Been Entered Into the System</h2>
+			Be sure to double check this reservation, and ask if the client would like something mailed
+			<br />	<br />
+			The transaction id # is: <?=$converted?> 	<br />
+			<br />	<br />
+			<h2><em>Nice! Click <a href="admincenter.php">Here</a> to return to the Admin center.</em></h2>
+		<? } ?>
+
 		<?
 		if ($origclientid == 0) {
 			echo <<<EOT

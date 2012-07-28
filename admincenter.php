@@ -15,9 +15,9 @@
     
 	// check for Reservations
 	$sqlcheck =<<<EOT
-		SELECT lastname,transactionid,timestamp,roomname,maxdate,mindate,numguests,invoicenum
+		SELECT lastname,firstname,phonenumber,email,handicap,activities,comments,prefcontact,transactionid,timestamp,roomname,maxdate,mindate,numguests,invoicenum
 		FROM
-			(SELECT lastname,transactionid,timestamp,roomname,MAX(date) AS maxdate,MIN(date) AS mindate,numguests,invoicenum 
+			(SELECT lastname,firstname,phonenumber,email,handicap,activities,comments,prefcontact,transactionid,timestamp,roomname,MAX(date) AS maxdate,MIN(date) AS mindate,numguests,invoicenum 
 			FROM rsrvtrans,rooms,login
 			WHERE rsrvtrans.room=rooms.room AND rsrvtrans.uid=login.uid
 			GROUP BY transactionid) AS hop
@@ -46,9 +46,44 @@ EOT;
 	
 	<!-- this is the script to initialize the datatables -->
 	<script type="text/javascript" charset="utf-8">
+			
+			/* Formating function for row details */
+			function fnFormatDetails ( oTable, nTr )
+			{
+				var aData = oTable.fnGetData( nTr );
+				var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px; text-align:left;">';
+				sOut += '<tr><td>Name:</td><td>'+aData[2]+', '+aData[3]+'</td>';
+				sOut += '<td>Phone:</td><td>'+aData[4]+'</td></tr>';
+				sOut += '<tr><td>Email:</td><td>'+aData[5]+'</td>';
+				sOut += '<td>Pref Contact:</td><td>'+aData[14]+'</td></tr>';
+				sOut += '<tr><td>Handicap Accessibility:</td><td>'+aData[6]+'</td></tr>';
+				sOut += '<tr style="display:none;"><td>'+aData[15]+'</td></tr>';
+				sOut += '<tr><td>Activities:</td><td class="activities" colspan="5">'+aData[12]+'</td></tr>';
+				sOut += '<tr><td>Comments:</td><td class="comments" colspan="5">'+aData[13]+'</td></tr>';
+				sOut += '</table>';
+
+				return sOut;
+			}
+			
 			var oTable;
 			
 			$(document).ready(function() {
+				/*
+				 * Insert a 'details' column to the table
+				 */
+				var nCloneTh = document.createElement( 'th' );
+				var nCloneTd = document.createElement( 'td' );
+				nCloneTd.innerHTML = '<img src="includes/details_open.png">';
+				nCloneTd.className = "center";
+
+				$('#curres thead tr').each( function () {
+					this.insertBefore( nCloneTh, this.childNodes[0] );
+				} );
+
+				$('#curres tbody tr').each( function () {
+					this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
+				} );
+
 				/* Apply the jEditable handlers to the table */
 				$('.invoice').editable( 'invoicechanger.php', {
 					"callback": function( sValue, y ) {
@@ -56,15 +91,91 @@ EOT;
 						oTable.fnUpdate( sValue, aPos[0], aPos[1] );
 					},
 					"submitdata": function ( value, settings ) {
-						return { "row_id": this.parentNode.getAttribute('class'), "transid": this.previousElementSibling.firstChild.innerHTML };
+						return { "row_id": this.parentNode.getAttribute('class'), "transid": this.previousElementSibling.previousElementSibling.firstChild.innerHTML };
 					},
 					"height": "10px",
 					"tooltip": "Click to edit... Add the invoice number here!",
 					"name":'newvalue'
 				} );
 				
+				
+				
 				/* Init DataTables */
-				oTable = $('#curres').dataTable();
+				oTable = $('#curres').dataTable( {
+					"aoColumnDefs": [
+						{ "bSortable": false, "aTargets": [ 0 ] }
+					],
+					"aaSorting": [[1, 'asc']],
+					"aoColumns": [ 
+						/* plus */   null,
+						/* res id */  null,
+						/* lname */  null,
+						/* fname */ { "bSearchable": false,"bVisible": false },
+						/* phone */ { "bSearchable": false,"bVisible": false },
+						/* email */ { "bSearchable": false,"bVisible": false },
+						/* Hcap */ { "bSearchable": false,"bVisible": false },
+						/* inv# */  null,
+						/* rm */    null,
+						/* ci */  null,
+						/* co */  null,
+						/* Gs */  null,
+						/* activities */ { "bSearchable": false,"bVisible": false },
+						/* comments */ { "bSearchable": false,"bVisible": false },
+						/* prefcontact */ { "bSearchable": false,"bVisible": false },
+						/* text res */ { "bSearchable": false,"bVisible": false },
+						/* del */  null
+					],
+				});
+				
+				
+				/* Add event listener for opening and closing details
+				 * Note that the indicator for showing which row is open is not controlled by DataTables,
+				 * rather it is done here
+				 */
+				$('td img', oTable.fnGetNodes() ).each( function () {
+					$(this).click( function () {
+						var nTr = this.parentNode.parentNode;
+						if ( this.src.match('details_close') )
+						{
+							/* This row is already open - close it */
+							this.src = "includes/details_open.png";
+							oTable.fnClose( nTr );
+						}
+						else
+						{
+							/* Open this row */
+							this.src = "includes/details_close.png";
+							oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
+							/* Apply the jEditable handlers to the table */
+							$('.activities').editable( 'activitychanger.php', {
+								"callback": function( sValue, y ) {
+									var aPos = oTable.fnGetPosition( this );
+									oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+								},
+								"submitdata": function ( value, settings ) {
+									return { "row_id": this.parentNode.getAttribute('class'), "transid": this.parentNode.firstElementChild.parentNode.previousSibling.firstChild.innerHTML };
+								},
+								"height": "10px",
+								"tooltip": "Click to edit... add comments here!",
+								"name":'newvalue'
+							} );
+
+							/* Apply the jEditable handlers to the table */
+							$('.comments').editable( 'commentchanger.php', {
+								"callback": function( sValue, y ) {
+									var aPos = oTable.fnGetPosition( this );
+									oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+								},
+								"submitdata": function ( value, settings ) {
+									return { "row_id": this.parentNode.getAttribute('class'), "transid": this.parentNode.firstElementChild.parentNode.previousSibling.previousSibling.firstChild.innerHTML };
+								},
+								"height": "10px",
+								"tooltip": "Click to edit... add comments here!",
+								"name":'newvalue'
+							} );
+						}
+					} );
+				} );
 			} );
 	</script>
 
@@ -126,7 +237,7 @@ EOT;
 	
 	<? progresswrite() ?>
 
-	<div id="content">
+	<div id="content" style="background-color: yellow;">
 		<h1 text-align="center">**ADMIN CENTER**</h1>
 		<a href="allres"></a>
 		<h2><em>All Reservations</em></h2>
@@ -140,11 +251,19 @@ EOT;
 					<tr id="curreshead">
 						<th style="width: 100px; " class="sorting_asc"><? echo "Res ID" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "L.Name" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "F.Name" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "Phone" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "Email" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "HCap" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "Inv #" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "Rm" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "CI" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "CO" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "# Gs" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "Act" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "Com" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "Contact" ?></th>
+						<th style="width: 100px; " class="sorting"><? echo "textres" ?></th>
 						<th style="width: 100px; " class="sorting"><? echo "Del" ?></th>
 					</tr>
 				</thead>
@@ -158,6 +277,16 @@ EOT;
 							echo $row["transactionid"] ?></a>
 						</td>
 						<td class="lastname"><? echo $row["lastname"] ?></td>
+						<td class="firstname"><? echo $row["firstname"] ?></td>
+						<td class="phonenumber"><? echo $row["phonenumber"] ?></td>
+						<td class="email"><? echo $row["email"] ?></td>
+						<td class="handicap"><? if ($row["handicap"] == 0) {
+									echo "No";
+								}
+							   else {
+									echo "Yes";
+							   }
+						?></td>
 						<td class="invoice"><? if ($row["invoicenum"] == 0) {
 									echo "Waiting Approval";
 								}
@@ -169,6 +298,10 @@ EOT;
 						<td class="earlydate"><? echo date('F j, Y', strtotime($row["mindate"])) ?></td>
 						<td class="latedate"><? echo date('F j, Y', strtotime( '+1 day', strtotime($row["maxdate"]))) ?></td>
 						<td class="numguests"><? echo $row["numguests"] ?></td>
+						<td class="activities"><? echo $row["activities"] ?></td>
+						<td class="comments"><? echo $row["comments"] ?></td>
+						<td class="prefcontact"><? echo $row["prefcontact"] ?></td>
+						<td class="prefcontact"><? echo $row["transactionid"] ?></td>
 						<td class="transid"><a onClick="alertDel('<?=$row["transactionid"]?>')" href="#allres">Del</a>
 						</td>
 					</tr>
@@ -202,8 +335,8 @@ EOT;
 		
 		<div id="changedates">
 			
-			<form method="post" action="bookit.php">
-				<input id="jsonchangedates" name="jsondates" value="" type="hidden" />
+			<form method="post" action="changeres.php">
+				<input id="jsonchangedates" name="jsonchangedates" value="" type="hidden" />
 				<input id="changetransid" name="changetransid" value="" type="hidden" />
 				<br />
 				<strong><em>Change to Dates in Green: </em></strong>

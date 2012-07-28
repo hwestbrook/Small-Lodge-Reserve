@@ -94,12 +94,12 @@
 			<table id="curres">
 				<thead>
 					<tr id="curreshead">
-						<td><? echo "Reservation ID" ?></td>
-						<td><? echo "Approval Number" ?></td>
-						<td><? echo "Room" ?></td>
-						<td><? echo "Check-In" ?></td>
-						<td><? echo "Check-Out" ?></td>
-						<td><? echo "Number of Guests" ?></td>
+						<td><? echo " Reservation ID " ?></td>
+						<td><? echo " Approval Number " ?></td>
+						<td><? echo " Room " ?></td>
+						<td><? echo " Check-In " ?></td>
+						<td><? echo " Check-Out " ?></td>
+						<td><? echo " Guests " ?></td>
 					</tr>
 				</thead>
 				<tbody class="currestbl">
@@ -119,8 +119,8 @@
 							   }
 						?></td>
 						<td><? echo $row["roomname"] ?></td>
-						<td><? echo date('F j, Y', strtotime($row["MIN(date)"])) ?></td>
-						<td><? echo date('F j, Y', strtotime( '+1 day', strtotime($row["MAX(date)"]))) ?></td>
+						<td><? echo date('M j, Y', strtotime($row["MIN(date)"])) ?></td>
+						<td><? echo date('M j, Y', strtotime( '+1 day', strtotime($row["MAX(date)"]))) ?></td>
 						<td><? echo $row["numguests"] ?></td>
 					</tr>
 				<? } ?>
@@ -152,8 +152,8 @@
 		
 		<div id="changedates">
 			
-			<form method="post" action="bookit.php">
-				<input id="jsonchangedates" name="jsondates" value="" type="hidden" />
+			<form method="post" action="changeres.php">
+				<input id="jsonchangedates" name="jsonchangedates" value="" type="hidden" />
 				<input id="changetransid" name="changetransid" value="" type="hidden" />
 				<br />
 				<strong><em>Change to Dates in Green: </em></strong>
